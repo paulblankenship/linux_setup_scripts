@@ -6,9 +6,12 @@ Once visible outside of a working branch, each script will be well commented as 
 ## Debian
 Scripts listed here are primarily written for Debian.  They may or may not work with (K|X)Ubuntu, Mint, etc unless mentioned that they have been tested to have worked with the downstream distributions.  The primary distributions I personally use is either Debian proper or Linux Mint Debian Edition (LMDE).
 
-1. `bin/deb_base_setup` (Bookworm/LMDE) - This script performs a bare minimum configuration to allow for external bootstrapping
-   1. Installs sudo and vim
-   2. Sets vim as default editor for visudo
-   3. Sets `%sudo` group to `NOPASSWD:ALL`
-   4. Adds $user to sudo group
-   5. Sets ~/.bashrc (files/.bashrc) for $user to switch PS1 'w' to 'W' (prompt only shows current directory, not full path)
+### bin/deb_base_setup (Bookwork/LMDE)
+Performs a bare minimum configuration to allow for basic editing or external bootstrapping.  The below steps can be performed to run this script without installing anything extra prior.
+
+```
+wget https://github.com/paulblankenship/linux_setup_scripts/archive/refs/heads/master.tar.gz
+tar xvzf master.tar.gz
+cd linux_setup_scripts-master/
+su root -c "bin/deb_base_setup pern
+```
