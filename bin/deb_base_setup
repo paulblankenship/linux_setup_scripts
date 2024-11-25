@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# A simple script intended to be used after a
+# basic 'iso' boot install.  Will work with both
+# Debian Bookwork and LMDE.
+
+# Must be run as root.
+if [[ $(id -u) -ne 0 ]]; then
+  echo "root is required for this script to function"
+  exit 1
+fi
+
+# We want a beginning user to configure
+if [[ -z $1 ]]; then
+  echo ""
+  echo "1 input is expected"
+  echo ""
+  echo "usage: $0 <username>"
+  echo ""
+  exit 1
+fi
+
+ADMIN_USER=$1
+
+# Install sudo and vim.  Also use vim for visudo
+apt update && apt install -y sudo vim
+update-alternatives --set editor /usr/bin/vim.basic
+
+# Give $ADMIN_USER NOPASSWD sudo permissions and updated .bashrc
+usermod -aG sudo $ADMIN_USER
+sed -i 's/%sudo/#%sudo/g' /etc/sudoers
+sed -i '/Allow members of group sudo/a %sudo ALL\=(ALL:ALL) NOPASSWD:ALL' /etc/sudoers
+cp files/.bashrc "/home/$ADMIN_USER/"
+
+echo "User and sudoers updated."
+echo "Please log out and back in."
