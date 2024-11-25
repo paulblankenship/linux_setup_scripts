@@ -27,7 +27,7 @@ apt update && apt install -y sudo vim
 update-alternatives --set editor /usr/bin/vim.basic
 
 # Give $ADMIN_USER NOPASSWD sudo permissions and updated .bashrc
-usermod -aG sudo $ADMIN_USER
+/usr/sbin/usermod -aG sudo $ADMIN_USER
 sed -i 's/%sudo/#%sudo/g' /etc/sudoers
 sed -i '/Allow members of group sudo/a %sudo ALL\=(ALL:ALL) NOPASSWD:ALL' /etc/sudoers
 cp files/.bashrc "/home/$ADMIN_USER/"
