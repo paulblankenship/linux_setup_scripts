@@ -13,5 +13,5 @@ Performs a bare minimum configuration to allow for basic editing or external boo
 wget https://github.com/paulblankenship/linux_setup_scripts/archive/refs/heads/master.tar.gz
 tar xvzf master.tar.gz
 cd linux_setup_scripts-master/
-su root -c "bin/deb_base_setup pern
+su root -c "bin/deb_base_setup <username>"
 ```
